@@ -1,5 +1,0 @@
-# ninja log v5
-12	345	6977043894803800	math/CMakeFiles/MathFunctions.dir/math_utility.cpp.obj	30f72c2535853344
-346	463	6977043895611645	math/MathFunctions.lib	b8eb387ce4766706
-508	835	6977047531087003	MultipleSubdirectories.exe	dcb5a5f6f20ff071
-0	507	6977047528892866	CMakeFiles/MultipleSubdirectories.dir/main.cpp.obj	4cb9abf8220232c3

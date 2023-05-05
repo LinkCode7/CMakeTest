@@ -1,6 +1,0 @@
-E:/Sindy/CMakeTest/basic/multiple_subdirectories/out/build/x64-Debug/CMakeFiles/edit_cache.dir
-E:/Sindy/CMakeTest/basic/multiple_subdirectories/out/build/x64-Debug/CMakeFiles/MultipleSubdirectories.dir
-E:/Sindy/CMakeTest/basic/multiple_subdirectories/out/build/x64-Debug/CMakeFiles/rebuild_cache.dir
-E:/Sindy/CMakeTest/basic/multiple_subdirectories/out/build/x64-Debug/math/CMakeFiles/MathFunctions.dir
-E:/Sindy/CMakeTest/basic/multiple_subdirectories/out/build/x64-Debug/math/CMakeFiles/edit_cache.dir
-E:/Sindy/CMakeTest/basic/multiple_subdirectories/out/build/x64-Debug/math/CMakeFiles/rebuild_cache.dir
