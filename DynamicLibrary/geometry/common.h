@@ -1,12 +1,12 @@
 #ifndef COMMON_H
 #define COMMON_H
 
-#define GEOMETRY_API
+//#define GEOMETRY_API
 
 #ifdef GEOMETRY_MODULE
-    #define GEOMETRY_API __declspec(dllexport)
-#else
     #define GEOMETRY_API __declspec(dllimport)
+#else
+    #define GEOMETRY_API __declspec(dllexport)
 #endif
 
 namespace utility
