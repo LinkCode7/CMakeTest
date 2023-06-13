@@ -1,0 +1,6 @@
+E:/link/CMakeTest/DynamicLibrary2/out/build/x64-Debug/CMakeFiles/rebuild_cache.dir
+E:/link/CMakeTest/DynamicLibrary2/out/build/x64-Debug/CMakeFiles/LinkDynamicLibrary.dir
+E:/link/CMakeTest/DynamicLibrary2/out/build/x64-Debug/CMakeFiles/edit_cache.dir
+E:/link/CMakeTest/DynamicLibrary2/out/build/x64-Debug/geometry/CMakeFiles/geometry.dir
+E:/link/CMakeTest/DynamicLibrary2/out/build/x64-Debug/geometry/CMakeFiles/edit_cache.dir
+E:/link/CMakeTest/DynamicLibrary2/out/build/x64-Debug/geometry/CMakeFiles/rebuild_cache.dir

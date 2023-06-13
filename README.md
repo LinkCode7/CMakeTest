@@ -7,7 +7,8 @@ File | 一个最简单的HelloWorld项目 | add_executable
 File2 | 多个源文件的项目 | file
 File3 | 多个目录、多个源文件的项目 | file、aux_source_directory
 StaticLibrary | 将工程内的子目录编译为静态库，供工程内的其它文件使用 | add_subdirectory、add_library、target_link_libraries
-StaticLibrary2 | 将工程内的子目录编译为静态库，并指定库的输出路径，供工程内的其它文件使用 | 
+StaticLibrary2 | 将工程内的子目录编译为静态库，并指定库的输出路径，供工程内的其它文件使用 | -
+DynamicLibrary | 将工程内的子目录编译为动态库 | add_subdirectory、add_library、target_link_libraries、__declspec(dllexport)
 GoogleTest | 动态链接googletest到工程内 | find_library、target_link_libraries、add_custom_command
 
 
@@ -15,10 +16,16 @@ GoogleTest | 动态链接googletest到工程内 | find_library、target_link_lib
 
 
 ## 实用的命令
-- 添加宏定义：target_compile_definition
+- 添加宏定义：target_compile_definitions
 ```cpp
 # cmake version >= 2.8.11
 string(TIMESTAMP MyDateVersion "%Y%m%d")
 string(TIMESTAMP MyDateTime "%Y-%m-%d %H:%M:%S")
 add_compile_definitions(MY_DATE_VERSION="${MyDateVersion}") # "20230504"
 ```
+
+## 其它
+- 编译googletest
+>1. [下载googletest源码](https://github.com/google/googletest)
+>2. cmake .. -DCMAKE_BUILD_TYPE=Debug // 编译配置（debug版本）
+>3. cmake --build . // 编译

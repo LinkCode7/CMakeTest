@@ -1,0 +1,9 @@
+# ninja log v5
+0	36	0	clean	f0859c636203ad58
+124	556	7078324162089887	../../../bin/geometry.dll	6f6d1d49fa611241
+45	209	7078319057078845	geometry/CMakeFiles/geometry.dir/common.cpp.obj	f3d187b44d9c663e
+39	151	7078319888599804	geometry/CMakeFiles/geometry.dir/entity/point.cpp.obj	ea80a649bc9a7d3a
+368	723	7078324417662102	../../../bin/LinkDynamicLibrary.exe	5e4dc521da8076b4
+12	123	7078324158369023	geometry/CMakeFiles/geometry.dir/entity/line.cpp.obj	14a3a40073c5d403
+124	556	7078324162089887	../../../bin/geometry.lib	6f6d1d49fa611241
+1	368	7078324414626101	CMakeFiles/LinkDynamicLibrary.dir/main.cpp.obj	520abe322ca6a8cf

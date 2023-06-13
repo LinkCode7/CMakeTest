@@ -1,8 +1,6 @@
 #ifndef COMMON_H
 #define COMMON_H
 
-//#define GEOMETRY_API
-
 #ifdef GEOMETRY_MODULE
     #define GEOMETRY_API __declspec(dllimport)
 #else

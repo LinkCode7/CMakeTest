@@ -1,0 +1,7 @@
+# ninja log v5
+0	18	0	clean	f0859c636203ad58
+10	138	7078325730931970	CMakeFiles/geometry.dir/entity/line.cpp.obj	43ceeeb50788d7fa
+1	139	7078325730931970	CMakeFiles/geometry.dir/entity/point.cpp.obj	911b1782a2883404
+35	145	7078325731192027	CMakeFiles/geometry.dir/common.cpp.obj	6f04c41d568e2875
+146	824	7078325737708710	../../../bin/geometry.dll	93d2a7486b707f27
+146	824	7078325737708710	../../../bin/geometry.lib	93d2a7486b707f27
