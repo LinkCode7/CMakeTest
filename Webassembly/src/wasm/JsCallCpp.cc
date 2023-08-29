@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "../ConstWasm.h"
+#include "WasmConst.h"
 
 EM_PORT_API(int) fibonacci(int n)
 {

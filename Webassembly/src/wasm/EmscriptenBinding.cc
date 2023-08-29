@@ -8,12 +8,12 @@
 
 namespace sindy
 {
-MyPoint::MyPoint(int x, const std::string& y) : x(x), y(y)
-{ // JsObject.delete()会执行构造
-    std::cout << ">>> MyPoint::MyPoint(int x, const std::string& y)" << std::endl;
+MyPoint::MyPoint(double xx, double yy, std::string const& str) : _x(xx), _y(yy), _str(str)
+{ // Js.Module.MyPoint()会执行构造
+    std::cout << ">>> MyPoint::MyPoint(double xx, double yy, const std::string& str)" << std::endl;
 }
 MyPoint::~MyPoint()
-{ // JsObject.delete()会执行析构
+{ // Js.EmbindObject.delete()会执行析构
     std::cout << ">>> MyPoint::~MyPoint()" << std::endl;
 }
 
@@ -27,7 +27,7 @@ emscripten::val getBuffer()
     return emscripten::val(emscripten::typed_memory_view(bufferLength, byteBuffer));
 }
 
-TriangleData* getTriangle(int params)
+TriangleData* getTriangleData(int params)
 {
     TriangleData* pData = new TriangleData();
     return pData;
@@ -49,22 +49,54 @@ emscripten::val getTrianglePoint(const TriangleData& data)
 
 } // namespace sindy
 
+std::vector<EmbindObject> g_objects;
+
+void printFirstObject()
+{
+    auto const& arr  = EmbindManager::instance().data();
+    auto        size = arr.size();
+    std::cout << ">>>EmbindManager::instance().data().size() = " << size << std::endl;
+
+    if (size > 0)
+        std::cout << ">>>arr[0]->doubleValue() = " << arr[0]->doubleValue() << std::endl;
+}
+std::vector<EmbindObject*> getTestObject()
+{
+    auto object = new EmbindObject(100, 3.14, "obj");
+    EmbindManager::instance().add(object);
+
+    auto const& arr = EmbindManager::instance().data();
+
+    g_objects.clear();
+    for (auto const& pObject : arr)
+        g_objects.emplace_back(*pObject);
+
+    return arr;
+    // return emscripten::val::array(g_objects.begin(), g_objects.end());
+}
+
 EMSCRIPTEN_BINDINGS(sindy)
 {
     using namespace sindy;
+
+    emscripten::function("_getTestObject", &getTestObject);
+    emscripten::function("_printFirstObject", &printFirstObject);
 
     // binding function
     emscripten::value_object<Point>("Point").field("x", &Point::x).field("y", &Point::y);
 
     emscripten::function("_getPoint", &getPoint);
     emscripten::function("_getBuffer", &getBuffer, emscripten::allow_raw_pointers());
-    emscripten::function("_getTriangle", &getTriangle, emscripten::allow_raw_pointers());
+    emscripten::function("_getTriangleData", &getTriangleData, emscripten::allow_raw_pointers());
 
     // binding class
     emscripten::class_<MyPoint>("MyPoint")
-        .constructor<int, const std::string&>()
-        .function("incrementX", &MyPoint::incrementX)
-        .property("x", &MyPoint::getX, &MyPoint::setX)
+        .constructor<double, double, std::string const&>()
+        .function("resetX", &MyPoint::resetX)
+        .function("getX", &MyPoint::getX)
+        .function("setX", &MyPoint::setX)
+        .function("getY", &MyPoint::getY)
+        .function("setY", &MyPoint::setY)
         .class_function("getStringFromInstance", &MyPoint::getStringFromInstance);
 
     // 这种方式不仅把数据导出了，还不侵入TriangleData类的设计!
@@ -72,4 +104,14 @@ EMSCRIPTEN_BINDINGS(sindy)
         .function("_vertexs", &getTriangleVertexs, emscripten::allow_raw_pointers())
         .function("_str", &getTriangleStr, emscripten::allow_raw_pointers())
         .function("_points", &getTrianglePoint, emscripten::allow_raw_pointers());
+
+    emscripten::class_<EmbindObject>("EmbindObject")
+        .constructor<int, double, std::string const&>()
+        .function("intValue", &EmbindObject::intValue)
+        .function("doubleValue", &EmbindObject::doubleValue)
+        .function("stringValue", &EmbindObject::stringValue)
+        .function("setDouble", &EmbindObject::setDouble)
+        .class_function("doIt", &EmbindObject::doIt);
+
+    emscripten::register_vector<EmbindObject*>("vector_EmbindObject");
 }

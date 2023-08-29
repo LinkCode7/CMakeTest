@@ -1,0 +1,43 @@
+cmake_minimum_required(VERSION 3.20)
+project(Project)
+
+set(CMAKE_CXX_STANDARD 20)
+
+aux_source_directory(. SRCS)
+aux_source_directory(geometry SRCS)
+
+if(EMSCRIPTEN) # emscripten
+
+aux_source_directory(wasm SRCS)
+
+#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --js-library ../test.js")
+
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -lembind")
+set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -s MODULARIZE")
+#set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -s EXPORT_NAME='createJERBOA'")
+set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -s ALLOW_MEMORY_GROWTH=1")
+set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -s EXPORTED_RUNTIME_METHODS=ccall,cwrap")
+set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -s EXPORTED_FUNCTIONS=_malloc,_free")
+set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -s -fwasm-exceptions")
+set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -s EXPORT_ES6")
+set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -s ENVIRONMENT='web'")
+
+if(CMAKE_BUILD_TYPE STREQUAL Debug)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O0")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g")
+#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g4 --source-map-base http://localhost:9091/")
+set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -s SAFE_HEAP=1")
+else()
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3")
+endif()
+
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
+add_executable(${PROJECT_NAME} ${SRCS})
+
+else()
+
+add_library(${PROJECT_NAME} STATIC ${SRCS})
+
+endif()
+
+message(">>> SRCS=${SRCS}")
