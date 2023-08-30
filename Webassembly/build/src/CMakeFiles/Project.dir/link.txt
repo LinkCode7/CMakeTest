@@ -1,1 +1,0 @@
-C:\code\emsdk\upstream\emscripten\em++.bat  -g --bind -g @CMakeFiles\Project.dir\objects1.rsp -o E:\link\CMakeTest\Webassembly\bin\Project.js 
